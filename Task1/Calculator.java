@@ -14,11 +14,6 @@ public class Calculator {
         //That check on user input is like that (x + y) or (x - y) or (x * y) , ....... 
         if (number.length == 3 ){
 
-            // if(number[2].equals("0")){
-            //     System.out.println("Error"); 
-            //     return;
-            // }
-
             //That for validate user input if not enter numeric input
             try{
                 //convert 2 numbers to Int to can do operations on them
@@ -34,9 +29,9 @@ public class Calculator {
 
                 //check if user input is / will call add function
                 if(number[1].equals("/")) {
-                    divide(number_int1 , number_int2);
-                    // System.out.println(result2);
-                    // return;
+                    float result2 = divide(number_int1 , number_int2);
+                    System.out.println(result2);
+                    return;
                 }
             }
 
@@ -45,31 +40,31 @@ public class Calculator {
                 System.out.println("Error");
                 return;
             }
-            
-            
-
 
         }
-
-
     }
 
     static int add(int x , int y) {
         return x+y;
     }
 
-    static void divide(int x , int y)  {
+    static float divide(int x , int y)  {
+        //That only to take result and check on it 
+        float result = x/y ;
         
         try{
-            float result = (float) x / y ;
-            System.out.println(result);
+            //That only For catching Value if divide by 0 will out infinity so it cannot convert to int  
+            int res = (int)result ;
+            //If No any Arithmetic Exception will return result
+            return ((float)x/y);
         }
         
         catch(ArithmeticException e){
             System.out.println("Error");
-            return;
+            //System will exit out 
+            System.exit(-1);
+            //That only for execute code but catch will ended at above line
+            return 1.0f;
         }
-
-
     }
 }
