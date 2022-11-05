@@ -287,7 +287,7 @@ public class Test {
                         System.out.print("[" + var[0] + " , " + var[1] + "]  ");
                         }
                     
-                    Test.thershDetection(counter , 0);
+                    Test.thershDetection(counter , 9);
                     
                     //Initialization all variables && make all counters as default
                     counter = 1  ; count = -1; counting = 0;
@@ -317,8 +317,8 @@ public class Test {
         }
 
         //printing array that have means
-        System.out.println();
-        System.out.println("***********************************");
+        // System.out.println();
+        // System.out.println("***********************************");
         Arrays.sort(meansArray, Comparator.comparingDouble(o -> o[0]));
         System.out.println(Arrays.deepToString(meansArray));
         // for(int i = 0 ; i < finalResult.size() ; i++){
@@ -341,11 +341,11 @@ public class Test {
         //                 {0,1,1,0}};
         int[][] arr =  {{1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1}, 
                         {1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1}, 
-                        {1, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 0}, 
-                        {0, 0, 0, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 0, 1}, 
-                        {1, 1, 1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 0}, 
-                        {1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 1, 0}, 
-                        {0, 0, 1, 1, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 1}, 
+                        {1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0}, 
+                        {0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1}, 
+                        {1, 1, 1, 0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 0, 0}, 
+                        {1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0}, 
+                        {0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1}, 
                         {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}, 
                         {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
                         {1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1},
