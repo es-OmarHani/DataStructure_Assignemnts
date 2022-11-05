@@ -4,16 +4,15 @@ import java.util.Comparator;
 
 
 public class Test {
-
+    //List for saving all points that will be equale 1 in sparse array
     private static ArrayList<Integer[]> saved = new ArrayList<>();
+    //List for saving min , max of means 
     private static ArrayList<Integer> finalResult = new ArrayList<>();
-    // private static int[][] savedData = new int[50][2];
-    private static int counter = 1 , count = -1 , counting = 0 ;
+    
+    private static int counter = 1 , counting = 0 ;
     private static int counterChain = 0;
-    private static boolean flag = true ;
-    // private static int count = 0;
 
-    public static void thershDetection(int count , int threshValue ) {
+    public static void thershDetection(int threshValue ) {
 
         //variables min and max y
         // int minY = saved.get(0)[0] , maxY = saved.get(0)[0] , minX = saved.get(0)[1] , maxX = saved.get(0)[1] ;
@@ -296,10 +295,10 @@ public class Test {
                         System.out.print("[" + var[0] + " , " + var[1] + "]  ");
                         }
                     
-                    Test.thershDetection(counter , 0);
+                    Test.thershDetection(0);
                     
                     //Initialization all variables && make all counters as default
-                    counter = 1  ; count = -1; flag = true ; counting = 0;
+                    counter = 1  ; counting = 0;
                     //clear array
                     // for(int count1 = 0 ; count1 < savedData.length ; count1 ++){
                     //     int[] clear = {0,0};
