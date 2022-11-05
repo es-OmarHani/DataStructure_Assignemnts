@@ -15,9 +15,10 @@ public class Test {
 
     public static void thershDetection(int count , int threshValue ) {
 
+        System.out.println("size = " + saved.size());
         //variables min and max y
-        // int minY = saved.get(0)[0] , maxY = saved.get(0)[0] , minX = saved.get(0)[1] , maxX = saved.get(0)[1] ;
-        int minY = 0 , maxY = 0 , minX = 0 , maxX = 0 ;
+        int minY = saved.get(0)[0] , maxY = saved.get(0)[0] , minX = saved.get(0)[1] , maxX = saved.get(0)[1] ;
+        // int minY = 0 , maxY = 0 , minX = 0 , maxX = 0 ;
         System.out.println();
         // System.out.println(Arrays.deepToString(savedData));
         //counter for valid points
@@ -96,6 +97,9 @@ public class Test {
         System.out.println( "New     => " +" "+ new_i + " " + new_j);
         System.out.println( "Counter => " + counter);
         
+        //Putting new Elements in array
+        Integer[] saved_arr = {new_i , new_j};
+
         //looping throw array
         if (count >= 0 ){
             for(Integer[] var : saved){
@@ -105,46 +109,39 @@ public class Test {
         }
         // && (arr[new_i][new_j+1] == 0 || arr[new_i][new_j+1] == 2 ) && (arr[new_i+1][new_j] == 0 || arr[new_i+1][new_j] == 2 ) && ( arr[new_i][new_j-1] == 0 || arr[new_i][new_j-1] == 2 ) && (arr[new_i-1][new_j] == 0 || arr[new_i-1][new_j] == 2) 
         //base case
-        try{
-            System.out.println("*******************************");
-            if(new_i == saved.get(0)[0] && new_j == saved.get(0)[1])
-            {
-                System.out.println("Doneeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-                return arr ;
-            }
-        }
-
-        catch(Exception e){
-            System.out.println("7mmmmmmmmmmmmmmmmar");
+        System.out.println("*******************************");
+        if(saved.size() > 0 &&  new_i == saved.get(0)[0] && new_j == saved.get(0)[1])
+        {
+            System.out.println("Doneeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            return arr ;
         }
     
         //Increment Element array
         if(arr[new_i][new_j] == 1)
             arr[new_i][new_j] ++;
         
-
         try {
-    
+
             //-- search right --
             if ( new_j < (arr[0].length - 1)  && (arr[new_i][new_j+1] == 1  ) ) {
                 System.out.println("...............Right");
                 counter ++ ; count++ ;
                 
                 //looping throw array
-                for(Integer[] var : saved){
+                // for(Integer[] var : saved){
                     System.out.println("Done....R.........");
                     //check if point is there isn't inside the array then will put it 
                     //Putting new Elements in array
-                    Integer[] saved_arr = {new_i , new_j};
-                    if (saved.contains(saved_arr) == false){
+                    // Integer[] saved_arr = {new_i , new_j};
+                    if (saved.contains(saved_arr) == false || counter == 1){
                         saved.add(saved_arr);
-
+                    }
                         for(Integer[] var1 : saved){
                             //check if point is there isn't inside the array then will put it 
                             System.out.print("[" + var1[0] + " , " + var1[1] + "]  ");
                         }
-                    }
-                }
+                    // }
+                // }
                 //Calling recursion with new location "Right"
                 recursiveFind(arr , new_i , new_j+1 , caller_i , caller_j );
             }
@@ -155,15 +152,14 @@ public class Test {
                 counter ++ ; count++ ;
                 
                 //looping throw array
-                for(Integer[] var : saved){
+                // for(Integer[] var : saved){
                     System.out.println("Done.......B......");
                     //check if point is there isn't inside the array then will put it 
-                    //Putting new Elements in array
-                    Integer[] saved_arr = {new_i , new_j};
-                    if (saved.contains(saved_arr) == false){
+                    
+                    if (counter == 1 || saved.contains(saved_arr) == false ){
                         saved.add(saved_arr);
                     }
-                }
+                // }
                 
                 for(Integer[] var1 : saved){
                     //check if point is there isn't inside the array then will put it 
@@ -182,11 +178,11 @@ public class Test {
                 
                 
                 //looping throw array
-                for(Integer[] var : saved){
+                // for(Integer[] var : saved){
                     //check if point is there isn't inside the array then will put it 
                     //Putting new Elements in array
-                    Integer[] saved_arr = {new_i , new_j};
-                    if (saved.contains(saved_arr) == false){
+                    // Integer[] saved_arr = {new_i , new_j};
+                    if (saved.contains(saved_arr) == false || counter == 1){
                         saved.add(saved_arr);
                     }
 
@@ -194,7 +190,7 @@ public class Test {
                         //check if point is there isn't inside the array then will put it 
                         System.out.print("[" + var1[0] + " , " + var1[1] + "]  ");
                     }
-                }
+                // }
                 //Calling recursion with new location "Left"
                 recursiveFind(arr, new_i, new_j-1 , caller_i , caller_j);
             }
@@ -206,11 +202,11 @@ public class Test {
                 counter ++ ; count++ ;
                 
                 //looping throw array
-                for(Integer[] var : saved){
+                // for(Integer[] var : saved){
                     //check if point is there isn't inside the array then will put it 
                     //Putting new Elements in array
-                    Integer[] saved_arr = {new_i , new_j};
-                    if (saved.contains(saved_arr) == false){
+                    // Integer[] saved_arr = {new_i , new_j};
+                    if (saved.contains(saved_arr) == false || counter == 1){
                         saved.add(saved_arr);
                     }
 
@@ -218,7 +214,7 @@ public class Test {
                         //check if point is there isn't inside the array then will put it 
                         System.out.print("[" + var1[0] + " , " + var1[1] + "]  ");
                     }
-                }
+                // }
                 
                 //Calling recursion with new location "Up"
                 recursiveFind(arr, new_i-1, new_j , caller_i , caller_j );
@@ -230,32 +226,23 @@ public class Test {
                 System.out.println("..............Back");
 
                 //Putting new Elements in array
-                Integer[] saved_arr = {new_i , new_j};
+                // Integer[] saved_arr = {new_i , new_j};
                 
                 
-                if (saved.contains(saved_arr) == false){
+                if (saved.contains(saved_arr) == false || counter == 1){
                     System.out.println("Done..............");
+                    System.out.println("size = " + saved.size());
+                    //check if point is there isn't inside the array then will put it 
+                    saved.add(saved_arr);
+                }
                     //looping throw array
-                    for(Integer[] var : saved){
+                    for(Integer[] var1 : saved){
                         //check if point is there isn't inside the array then will put it 
-                        if (saved.contains(saved_arr) == false){
-                            saved.add(saved_arr);
-                        }
-
-                        for(Integer[] var1 : saved){
-                            //check if point is there isn't inside the array then will put it 
-                            System.out.print("[" + var1[0] + " , " + var1[1] + "]  ");
-                        }
+                        System.out.print("[" + var1[0] + " , " + var1[1] + "]  ");
                     }
-
+                    
                     //Out on screen
                     System.out.println("New => " +" "+ new_i + " " + new_j);
-
-                     //looping throw array
-                    for(Integer[] var : saved){
-                        //check if point is there isn't inside the array then will put it 
-                        System.out.print("[" + var[0] + " , " + var[1] + "]  ");
-                    }
 
                     //Get row & col of Element before current Element
                     int row = saved.get(count-1)[0];
@@ -265,10 +252,14 @@ public class Test {
                     //that only for out on screen
                     System.out.println("row = "+ row + " col = " + col);
                     //Recursion with Element before current Element
+                    
                     recursiveFind(arr, row , col , caller_i , caller_j );
-                }
+                // }
             }
         }
+    
+            
+        
 
         catch(Exception e){
             System.out.println("[Error]: exception in recursiveFind()");
@@ -299,7 +290,7 @@ public class Test {
                     Test.thershDetection(counter , 0);
                     
                     //Initialization all variables && make all counters as default
-                    counter = 1  ; count = -1; flag = true ; counting = 0;
+                    counter = 1  ; count = -1; counting = 0;
                     //clear array
                     // for(int count1 = 0 ; count1 < savedData.length ; count1 ++){
                     //     int[] clear = {0,0};
@@ -344,25 +335,25 @@ public class Test {
         //                 {0,0,1,0,0,0,0,1},
         //                 {0,0,0,0,0,1,1,1},
         //                 {0,0,0,0,0,1,1,0}} ;
-        int[][] arr =  {{0,0,0,0},
-                        {0,0,0,1},
-                        {0,1,1,1},
-                        {0,1,1,0}};
-        // int[][] arr =  {{1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1}, 
-        //                 {1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1}, 
-        //                 {1, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 0}, 
-        //                 {0, 0, 0, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 0, 1}, 
-        //                 {1, 1, 1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 0}, 
-        //                 {1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 1, 0}, 
-        //                 {0, 0, 1, 1, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 1}, 
-        //                 {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}, 
-        //                 {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
-        //                 {1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-        //                 {0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0},
-        //                 {1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1},
-        //                 {1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1},
-        //                 {0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1},
-        //                 {1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1}};
+        // int[][] arr =  {{0,0,0,0},
+        //                 {0,0,0,1},
+        //                 {0,1,1,1},
+        //                 {0,1,1,0}};
+        int[][] arr =  {{1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1}, 
+                        {1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1}, 
+                        {1, 1, 1, 0, 0, 2, 0, 0, 1, 1, 0, 0, 1, 0, 0}, 
+                        {0, 0, 0, 2, 2, 2, 0, 1, 0, 0, 1, 0, 0, 0, 1}, 
+                        {1, 1, 1, 0, 0, 2, 2, 0, 1, 0, 0, 1, 1, 0, 0}, 
+                        {1, 1, 0, 0, 0, 2, 2, 0, 1, 1, 0, 0, 0, 1, 0}, 
+                        {0, 0, 1, 1, 0, 0, 2, 0, 1, 0, 0, 1, 1, 0, 1}, 
+                        {1, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1}, 
+                        {1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1},
+                        {1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+                        {0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0},
+                        {1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 1},
+                        {1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1},
+                        {0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1},
+                        {1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 0, 1}};
 
         traverseArr(arr);
 
