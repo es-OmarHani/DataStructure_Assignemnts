@@ -366,6 +366,11 @@ public class DoubleLinkedList   {
 
     /********************************************* subList  ************************************************/
     public void subList(int fromIndex, int toIndex){
+        // Make sure the index provided is valid
+        if (fromIndex < 0 || fromIndex >= size || toIndex < 0 || toIndex >= size) {
+            System.out.println("Error");
+        }
+        
         //Create Array will save subList in it
         DoubleLinkedList subList = new DoubleLinkedList() ;
         Node trav = head ;
