@@ -52,16 +52,26 @@ public class SingleLinkedList {
     /********************************************* ADDToIndex  ************************************************/
     //Add Element at specific index 
     public void addToIndex(int index, Object element){
+        
+        //If index at first will call function that will add to first
+        //Here if index = 0 and size of list = 0 then that will be add from last
+        if(index == 0 ){
+            if(size == 0 ){
+                addFirst(element);
+                return;
+            }
+
+            else{
+                addFirst(element);
+                return;
+            }
+        }
+
         // Make sure the index provided is valid
         if (index < 0 || index >= size) {
             System.out.println("Error");
         }
         
-        //If index at first will call function that will add to first
-        if(index == 0){
-            addFirst(element);
-            return;
-        }
 
         //Create trav pointer to point to index that will enter
         Node trav;
@@ -406,13 +416,6 @@ public class SingleLinkedList {
                     //Get Index & elem from user
                     int index = input.nextInt() ;
                     Object elem = input.nextInt() ;
-                    
-                    //Here if index = 0 and size of list = 0 then that will be add from last
-                    if(index == 0 && list.size == 0 ){
-                        list.add(elem);
-                        System.out.println(list.toString());
-                        return;
-                    }
 
                     //Append Elem at given index 
                     list.addToIndex(index, elem);

@@ -4,62 +4,6 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-// interface ILinkedList {
-// /**
-// * Inserts a specified element at the specified position in the list.
-// * @param index
-// * @param element
-// */
-// public void add(int index, Object element);
-// /**
-// * Inserts the specified element at the end of the list.
-// * @param element
-// */
-// public void add(Object element);
-// /**
-// * @param index
-// * @return the element at the specified position in this list.
-// */
-// public Object get(int index);
-
-// /**
-// * Replaces the element at the specified position in this list with the
-// * specified element.
-// * @param index
-// * @param element
-// */
-// public void set(int index, Object element);
-// /**
-// * Removes all of the elements from this list.
-// */
-// public void clear();
-// /**
-// * @return true if this list contains no elements.
-// */
-// public boolean isEmpty();
-// /**
-// * Removes the element at the specified position in this list.
-// * @param index
-// */
-// public void remove(int index);
-// /**
-// * @return the number of elements in this list.
-// */
-// public int size();
-// /**
-// * @param fromIndex
-// * @param toIndex
-// * @return a view of the portion of this list between the specified fromIndex and toIndex, inclusively.
-// */
-// public ILinkedList sublist(int fromIndex, int toIndex);
-// /**
-// * @param o
-// * @return true if this list contains an element with the same value as the specified element.
-// */
-// public boolean contains(Object o);
-// }
-
-
 public class DoubleLinkedList   {
 	/* Implement your linked list class here*/
     private int size = 0;
@@ -108,6 +52,21 @@ public class DoubleLinkedList   {
     /********************************************* ADDToIndex  ************************************************/
     //Add Element at specific index 
     public void addToIndex(int index, Object element){
+
+        //If index at first will call function that will add to first
+        //Here if index = 0 and size of list = 0 then that will be add from last
+        if(index == 0 ){
+            if(size == 0 ){
+                addFirst(element);
+                return;
+            }
+
+            else{
+                addFirst(element);
+                return;
+            }
+        }
+
         // Make sure the index provided is valid
         if (index < 0 || index >= size) {
             System.out.println("Error");
@@ -159,6 +118,21 @@ public class DoubleLinkedList   {
             tail.next = new Node(elem, tail, null);
             //Then will make tail pointer pointing to last added element
             tail = tail.next;
+        }
+        //Increase size with one
+        size++;
+    }
+
+    //Add Element at start of list
+    public void addFirst(Object elem){
+        if (isEmpty()) {
+            //If empty then will change tail and head at the same new node
+            head = tail = new Node(elem, null , null);
+        } else {
+            //Else will change next of head to new node
+            head.prev = new Node(elem , null , head );
+            //Then will make head pointer pointing to first added element
+            head = head.prev;
         }
         //Increase size with one
         size++;
@@ -445,14 +419,7 @@ public class DoubleLinkedList   {
                     //Get Index & elem from user
                     int index = input.nextInt() ;
                     int elem = input.nextInt() ;
-                    
-                    //Here if index = 0 and size of list = 0 then that will be add from last
-                    if(index == 0 && list.size == 0 ){
-                        list.add(elem);
-                        System.out.println(list.toString());
-                        return;
-                    }
-                    
+
                     //Put Elem at given index 
                     list.addToIndex(index, elem);
 
