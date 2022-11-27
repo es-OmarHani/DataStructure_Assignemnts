@@ -60,7 +60,7 @@ import java.util.regex.*;
 // }
 
 
-public class DoubleLinkedList   {
+public class SinlgleLinkedList {
 	/* Implement your linked list class here*/
     private int size = 0;
     private Node head = null;
@@ -69,11 +69,10 @@ public class DoubleLinkedList   {
     // Internal node class to represent data
     private static class Node {
         private Object data;
-        private Node prev, next;
+        private Node next;
 
-        public Node (Object data, Node prev, Node next) {
+        public Node (Object data, Node next) {
             this.data = data;
-            this.prev = prev;
             this.next = next;
         }
 
@@ -86,23 +85,24 @@ public class DoubleLinkedList   {
     /********************************************* CLEAR  ************************************************/
     // Empty this linked list, O(n)
     public void clear() {
-        //Creating traversal pointer to loop on nodes in list
-        Node trav = head;
+        //Create traversal pointer to iterate on list 
+        Node trav = head ;
         //As long trav not at end [null] then remove elements
-        while (trav != null) {
-            //Creating node that will point to next node that traversal point to it to save chains of list
-            Node next = trav.next;
-            //Change value of next and previous to null but that node will remove so next pointer is saving chain of reminder of list
-            trav.prev = trav.next = null;
-            //will remove data from node
-            trav.data = 0 ;
-            //Then change trav to the same pointing of next which means the next node
-            trav = next;
+        while(trav != null ){
+            //Create next to traversal pointer to save chains of list
+            Node next = trav.next ;
+            //make next pointer in node that trav point to it point to null
+            trav.next = null;
+            //Make Data in node is n ull
+            trav.data = null; 
+            //Now will make trav point to next that will point to next node to remove it
+            trav = next ;
         }
+        
         //After all of that will change tail , head , trav to null to remove all that pointers
         head = tail = trav = null;
-        //change size to zero because list is removed
-        size = 0;
+        //Size will be = 0 
+        size = 0 ;
     }
 
     /********************************************* ADDToIndex  ************************************************/
@@ -117,29 +117,23 @@ public class DoubleLinkedList   {
     Node trav;
     int i;
 
-    // Search from the front of the list
-    if (index < size / 2) {
-        for (i = 0, trav = head; i != index; i++) {
-            trav = trav.next;
-        }
-    } 
-    // Search from the back of the list
-    else{
-        for (i = size - 1, trav = tail; i != index; i--) {
-            trav = trav.prev;
-        }
+    // Search from the front of the list until reach node before given index to point on it
+    for (i = 0, trav = head; i != index - 1 ; i++) {
+        trav = trav.next;
     }
 
-    //create new node that will pointed by previous node at index = Entered index
-    trav.prev.next = new Node(element , trav.prev , trav );
+
+    //create new node that will pointed by temporary pointer
+    Node temp = new Node(element , trav.next );
 
     //Now make pointer on node at index = index Entered no any pointer on it
-    trav.prev = trav.prev.next ;
-
+    trav.next = temp ;
+    
     //Increase size with one
     size++;
-    //Make trav point to nothing
+    //Make trav & temp point to nothing
     trav = null ;
+    temp = null ;
 
     }
 
@@ -153,12 +147,29 @@ public class DoubleLinkedList   {
     public void addLast(Object elem) {
         if (isEmpty()) {
             //If empty then will change tail and head at the same new node
-            head = tail = new Node(elem, null, null);
+            head = tail = new Node(elem, null);
         } else {
             //Else will change next of tail to new node
-            tail.next = new Node(elem, tail, null);
+            tail.next = new Node(elem, null);
             //Then will make tail pointer pointing to last added element
             tail = tail.next;
+        }
+        //Increase size with one
+        size++;
+    }
+
+    //Add Element at start of list
+    public void addFirst(Object elem){
+        if (isEmpty()) {
+            //If empty then will change tail and head at the same new node
+            head = tail = new Node(elem, null);
+        } else {
+            //Create trav to point to new node
+            Node trav = new Node(elem , head);
+            //Then will make head pointer pointing to first added element
+            head = trav;
+            //Make trav point to null 
+            trav = null ;
         }
         //Increase size with one
         size++;
@@ -177,17 +188,9 @@ public class DoubleLinkedList   {
         Node trav;
         int i;
 
-        // Search from the front of the list
-        if (index < size / 2) {
-            for (i = 0, trav = head; i != index; i++) {
-                trav = trav.next;
-            }
-        } 
-        // Search from the back of the list
-        else{
-            for (i = size - 1, trav = tail; i != index; i--) {
-                trav = trav.prev;
-            }
+        // Search from the front of the list until reach node
+        for (i = 0, trav = head; i != index; i++) {
+            trav = trav.next;
         }
 
         //return data pointed by trv pointer
@@ -207,17 +210,9 @@ public class DoubleLinkedList   {
         Node trav;
         int i;
 
-        // Search from the front of the list
-        if (index < size / 2) {
-            for (i = 0, trav = head; i != index; i++) {
-                trav = trav.next;
-            }
-        } 
-        // Search from the back of the list
-        else{
-            for (i = size - 1, trav = tail; i != index; i--) {
-                trav = trav.prev;
-            }
+        // Search from the front of the list until reach node
+        for (i = 0, trav = head; i != index; i++) {
+        trav = trav.next;
         }
 
         //Change data pointed by trav to new data
@@ -243,10 +238,12 @@ public class DoubleLinkedList   {
         if (isEmpty()){
             System.out.println("Error");
         } 
-        
+
         // Extract the data at the head and move
         // the head pointer forwards one node
         Object data = head.data;
+        //Make Trav point to first node
+        Node trav = head ;
         //Removing will be from the first so it will make head the next element
         head = head.next;
         --size;
@@ -254,8 +251,9 @@ public class DoubleLinkedList   {
         // If the list is empty set the tail to null
         if (isEmpty()) tail = null;
 
-            // Do a memory cleanup of the previous node
-        else head.prev = null;
+        // Do a memory cleanup of the previous node for next pointer 
+        trav.next = null;
+        trav = null;
 
         // Return the data that was at the first node we just removed
         return data;
@@ -265,41 +263,50 @@ public class DoubleLinkedList   {
     public Object removeLast() {
         // Can't remove data from an empty list
         if (isEmpty())  System.out.println("Error");
-
-        // Extract the data at the tail and move
-        // the tail pointer backwards one node
+        
+        // Extract the data at the head and move
         Object data = tail.data;
-        //Removing will be from the first so it will make head the next element
-        tail = tail.prev;
-        --size;
+        //Make Trav point to first node
+        Node trav = head;
 
-        // If the list is now empty set the head to null
-        if (isEmpty()) head = null;
+        //Loop until reach node that will be before node of tail
+        for( ; trav.next != tail ; trav = trav.next){}
 
-            // Do a memory clean of the node that was just removed
-        else tail.next = null;
+        //Now trav have node that will be before node of tail 
+        //So will make tail point to the same node of trav
+        tail = trav ;
+        //Decrement size 
+        size --;
 
-        // Return the data that was in the last node we just removed
+        // If the list is empty set the tail to null
+        if (isEmpty()) tail = null;
+        
+        //Do a memory cleanup of the node that before removed node for next pointer 
+        tail.next = null;
+
+        // Return the data that was at the last node we just removed
         return data;
     }
 
     // Remove an arbitrary node from the linked list, O(1)
-    private Object removeNode(Node node) {
+    private Object removeNode(Node trav) {
+        //At the first will get node needed to remove
+        Node node = trav.next ;
+
         // If the node to remove is somewhere either at the
         // head or the tail handle those independently
-        if (node.prev == null) return removeFirst();
         if (node.next == null) return removeLast();
-
-        // Make the pointers of adjacent nodes skip over 'node'
-        node.next.prev = node.prev;
-        node.prev.next = node.next;
 
         // Temporarily store the data we want to return
         Object data = node.data;
 
+        // Make the pointers of adjacent nodes skip over 'node'
+        trav.next = node.next ;
+
         // Memory cleanup
         node.data = null;
-        node = node.prev = node.next = null;
+        node = null ;
+        trav = null;
 
         --size;
 
@@ -315,18 +322,24 @@ public class DoubleLinkedList   {
         }
 
         int i;
-        Node trav;
+        Node trav = head ;
 
-        // Search from the front of the list
-        if (index < size / 2) {
-            for (i = 0, trav = head; i != index; i++) {
+        if(index == 0 ){
+            trav = null ;
+            return removeFirst();
+        }
+
+        else if(index == 1)
+            trav = head;
+
+        // Search from the front of the list until reach node
+        else {
+            for (i = 0, trav = head; i != index-1 ; i++) {
                 trav = trav.next;
-            }
-            // Search from the back of the list
-        } else
-            for (i = size - 1, trav = tail; i != index; i--) {
-                trav = trav.prev;
-            }
+                }
+        }
+
+        
 
         return removeNode(trav);
     }
@@ -368,9 +381,9 @@ public class DoubleLinkedList   {
         if (fromIndex < 0 || fromIndex >= size || toIndex < 0 || toIndex >= size) {
             System.out.println("Error");
         }
-
+        
         //Create Array will save subList in it
-        DoubleLinkedList subList = new DoubleLinkedList() ;
+        SinlgleLinkedList subList = new SinlgleLinkedList() ;
         Node trav = head ;
         
         //Loop on list 
@@ -403,29 +416,22 @@ public class DoubleLinkedList   {
         return sb.toString();
     }
 
-
-    // public ILinkedList sublist(int fromIndex, int toIndex)
-
     public static void main(String[] args) {
         //Create object from scanning class
         Scanner input = new Scanner(System.in) ;
         
         //Create object from DoubleLinkedList class
-        DoubleLinkedList list = new DoubleLinkedList(); 
+        SinlgleLinkedList list = new SinlgleLinkedList() ;
 
         try{
             //Create array with input numbers
             String numsString = input.nextLine().replace("[", "").replace("]", "");
             // System.out.println(numsString);
-            
             String nums[] = numsString.split(", ");
-            // System.out.println(Arrays.toString(nums));
-            // System.out.println(nums.length);
-
             //Create variable take method needed
             String method = input.next();
 
-            if(nums.length >= 1 && !nums[0].equals("") ){
+            if( nums.length >= 1 && !nums[0].equals("")){
                 // loop to append Entered Elements in list 
                 for(int i = 0 ; i < nums.length ; i++){
                     list.add(Integer.parseInt(nums[i]));
@@ -449,19 +455,9 @@ public class DoubleLinkedList   {
                 case "addToIndex":
                     //Get Index & elem from user
                     int index = input.nextInt() ;
-                    int elem = input.nextInt() ;
-                    // System.out.println("one");
-                    //Here if index = 0 and size of list = 0 then that will be add from last
-                    // if(index == 0 && list.size == 0 ){
-                    //     System.out.println("two");
-                    //     list.add(elem);
-                    //     System.out.println(list.toString());
-                    //     return;
-                    // }
-                    
-                    //Put Elem at given index 
+                    Object elem = input.nextInt() ;
+                    //Append Elem at given index 
                     list.add(index, elem);
-
                     //Print list
                     System.out.println(list.toString());
                     return;
@@ -496,8 +492,7 @@ public class DoubleLinkedList   {
                         System.out.println(element);
                     return;        
 
-                case "remove" :
-
+                case "remove" : 
                     //Get Index from user
                     int index5 = input.nextInt() ;
                     
