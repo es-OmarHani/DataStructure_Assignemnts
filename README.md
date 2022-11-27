@@ -1,5 +1,5 @@
 # DataStructure_Assignemnts
-All Tasks of Data will inshaallah Here
+All Tasks of Data Structure Of CSEx22 
 
 ## License
 
