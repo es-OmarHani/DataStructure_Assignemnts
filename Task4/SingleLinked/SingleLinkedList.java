@@ -404,15 +404,11 @@ public class SingleLinkedList implements ILinkedList {
 
     /********************************************* subList  ************************************************/
     public SingleLinkedList sublist(int fromIndex, int toIndex){
-        // Make sure the index provided is valid
-        if (fromIndex < 0 || fromIndex >= size || toIndex < 0 || toIndex >= size) {
-            System.out.println("Error");
-        }
-        
+                
         //Create Array will save subList in it
         SingleLinkedList subList = new SingleLinkedList() ;
         Node trav = head ;
-        
+
         //Loop on list 
         for(int i = 0 ; i <= toIndex ; i++ ){
 
@@ -564,6 +560,12 @@ public class SingleLinkedList implements ILinkedList {
                     //Get Index & elem from user
                     int fromIndex = input.nextInt() ;
                     int toIndex = input.nextInt() ;
+      
+                    // Make sure the index provided is valid
+                    if ((fromIndex < 0 || fromIndex >= list.size || toIndex < 0 || toIndex >= list.size ) || (fromIndex > toIndex)) {
+                        System.out.println("Error");
+                        return;
+                    }
                     
                     //Print subList
                     System.out.println(list.sublist(fromIndex, toIndex).toString());
