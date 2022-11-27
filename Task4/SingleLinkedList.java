@@ -4,63 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-// interface ILinkedList {
-// /**
-// * Inserts a specified element at the specified position in the list.
-// * @param index
-// * @param element
-// */
-// public void add(int index, Object element);
-// /**
-// * Inserts the specified element at the end of the list.
-// * @param element
-// */
-// public void add(Object element);
-// /**
-// * @param index
-// * @return the element at the specified position in this list.
-// */
-// public Object get(int index);
-
-// /**
-// * Replaces the element at the specified position in this list with the
-// * specified element.
-// * @param index
-// * @param element
-// */
-// public void set(int index, Object element);
-// /**
-// * Removes all of the elements from this list.
-// */
-// public void clear();
-// /**
-// * @return true if this list contains no elements.
-// */
-// public boolean isEmpty();
-// /**
-// * Removes the element at the specified position in this list.
-// * @param index
-// */
-// public void remove(int index);
-// /**
-// * @return the number of elements in this list.
-// */
-// public int size();
-// /**
-// * @param fromIndex
-// * @param toIndex
-// * @return a view of the portion of this list between the specified fromIndex and toIndex, inclusively.
-// */
-// public ILinkedList sublist(int fromIndex, int toIndex);
-// /**
-// * @param o
-// * @return true if this list contains an element with the same value as the specified element.
-// */
-// public boolean contains(Object o);
-// }
-
-
-public class SinlgleLinkedList {
+public class SingleLinkedList {
 	/* Implement your linked list class here*/
     private int size = 0;
     private Node head = null;
@@ -107,33 +51,39 @@ public class SinlgleLinkedList {
 
     /********************************************* ADDToIndex  ************************************************/
     //Add Element at specific index 
-    public void add(int index, Object element){
+    public void addToIndex(int index, Object element){
         // Make sure the index provided is valid
         if (index < 0 || index >= size) {
             System.out.println("Error");
         }
+        
+        //If index at first will call function that will add to first
+        if(index == 0){
+            addFirst(element);
+            return;
+        }
 
-    //Create trav pointer to point to index that will enter
-    Node trav;
-    int i;
+        //Create trav pointer to point to index that will enter
+        Node trav;
+        int i;
 
-    // Search from the front of the list until reach node before given index to point on it
-    for (i = 0, trav = head; i != index - 1 ; i++) {
-        trav = trav.next;
-    }
+        // Search from the front of the list until reach node before given index to point on it
+        for (i = 0, trav = head; i != index - 1 ; i++) {
+            trav = trav.next;
+        }
 
 
-    //create new node that will pointed by temporary pointer
-    Node temp = new Node(element , trav.next );
+        //create new node that will pointed by temporary pointer
+        Node temp = new Node(element , trav.next );
 
-    //Now make pointer on node at index = index Entered no any pointer on it
-    trav.next = temp ;
-    
-    //Increase size with one
-    size++;
-    //Make trav & temp point to nothing
-    trav = null ;
-    temp = null ;
+        //Now make pointer on node at index = index Entered no any pointer on it
+        trav.next = temp ;
+        
+        //Increase size with one
+        size++;
+        //Make trav & temp point to nothing
+        trav = null ;
+        temp = null ;
 
     }
 
@@ -219,19 +169,19 @@ public class SinlgleLinkedList {
         trav.data = element ;
     }
 
-    /********************************************* SIZE  ***************************************************/
+    /************************************************  SIZE  ***************************************************/
     // Return the size of this linked list
     public int size() {
         return size;
     }
 
-    /********************************************* isEMPTY  ************************************************/
+    /*********************************************** isEMPTY  ************************************************/
     // Is this linked list empty?
     public boolean isEmpty() {
         return size() == 0;
     }
 
-    /********************************************* Remove  ************************************************/
+    /*********************************************** Remove  ************************************************/
     // Remove the first value at the head of the linked list, O(1)
     public Object removeFirst() {
         // Can't remove data from an empty list
@@ -383,7 +333,7 @@ public class SinlgleLinkedList {
         }
         
         //Create Array will save subList in it
-        SinlgleLinkedList subList = new SinlgleLinkedList() ;
+        SingleLinkedList subList = new SingleLinkedList() ;
         Node trav = head ;
         
         //Loop on list 
@@ -421,7 +371,7 @@ public class SinlgleLinkedList {
         Scanner input = new Scanner(System.in) ;
         
         //Create object from DoubleLinkedList class
-        SinlgleLinkedList list = new SinlgleLinkedList() ;
+        SingleLinkedList list = new SingleLinkedList() ;
 
         try{
             //Create array with input numbers
@@ -456,8 +406,17 @@ public class SinlgleLinkedList {
                     //Get Index & elem from user
                     int index = input.nextInt() ;
                     Object elem = input.nextInt() ;
+                    
+                    //Here if index = 0 and size of list = 0 then that will be add from last
+                    if(index == 0 && list.size == 0 ){
+                        list.add(elem);
+                        System.out.println(list.toString());
+                        return;
+                    }
+
                     //Append Elem at given index 
-                    list.add(index, elem);
+                    list.addToIndex(index, elem);
+
                     //Print list
                     System.out.println(list.toString());
                     return;

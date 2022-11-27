@@ -107,13 +107,13 @@ public class DoubleLinkedList   {
 
     /********************************************* ADDToIndex  ************************************************/
     //Add Element at specific index 
-    public void add(int index, Object element){
+    public void addToIndex(int index, Object element){
         // Make sure the index provided is valid
         if (index < 0 || index >= size) {
             System.out.println("Error");
         }
-
-    //Create trav pointer to point to index that will enter
+    
+        //Create trav pointer to point to index that will enter
     Node trav;
     int i;
 
@@ -416,11 +416,8 @@ public class DoubleLinkedList   {
         try{
             //Create array with input numbers
             String numsString = input.nextLine().replace("[", "").replace("]", "");
-            // System.out.println(numsString);
             
             String nums[] = numsString.split(", ");
-            // System.out.println(Arrays.toString(nums));
-            // System.out.println(nums.length);
 
             //Create variable take method needed
             String method = input.next();
@@ -431,8 +428,6 @@ public class DoubleLinkedList   {
                     list.add(Integer.parseInt(nums[i]));
                 }
             }
-
-            // System.out.println(list.toString());
 
             //Switch on method Entered from user
             switch(method){
@@ -450,17 +445,16 @@ public class DoubleLinkedList   {
                     //Get Index & elem from user
                     int index = input.nextInt() ;
                     int elem = input.nextInt() ;
-                    // System.out.println("one");
+                    
                     //Here if index = 0 and size of list = 0 then that will be add from last
-                    // if(index == 0 && list.size == 0 ){
-                    //     System.out.println("two");
-                    //     list.add(elem);
-                    //     System.out.println(list.toString());
-                    //     return;
-                    // }
+                    if(index == 0 && list.size == 0 ){
+                        list.add(elem);
+                        System.out.println(list.toString());
+                        return;
+                    }
                     
                     //Put Elem at given index 
-                    list.add(index, elem);
+                    list.addToIndex(index, elem);
 
                     //Print list
                     System.out.println(list.toString());
@@ -497,7 +491,6 @@ public class DoubleLinkedList   {
                     return;        
 
                 case "remove" :
-
                     //Get Index from user
                     int index5 = input.nextInt() ;
                     
@@ -532,7 +525,6 @@ public class DoubleLinkedList   {
                     //Print flag
                     if (flag2)
                         System.out.println("True");
-                    
                     else    
                         System.out.println("False");
 
