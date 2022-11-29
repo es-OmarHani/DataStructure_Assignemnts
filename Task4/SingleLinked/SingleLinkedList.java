@@ -560,7 +560,7 @@ public class SingleLinkedList implements ILinkedList {
                     //Get Index & elem from user
                     int fromIndex = input.nextInt() ;
                     int toIndex = input.nextInt() ;
-      
+
                     // Make sure the index provided is valid
                     if ((fromIndex < 0 || fromIndex >= list.size || toIndex < 0 || toIndex >= list.size ) || (fromIndex > toIndex)) {
                         System.out.println("Error");
