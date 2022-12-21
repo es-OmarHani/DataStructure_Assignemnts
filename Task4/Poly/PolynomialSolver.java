@@ -603,7 +603,7 @@ public class PolynomialSolver implements IPolynomialSolver{
 			if (p.x >0 && Result!="") Result+=" + ";
 			else if (p.x <0  && Result!="")Result+=" - ";
 			if (p.x <-1 && Result=="")Result+=p.x;
-			else if (p.x ==-1 && p.y!=0 && Result =="")Result+='-';
+			else if (p.x ==-1 && p.y!=0 && Result =="")Result+="-1";
 			else if (p.x ==1 && p.y ==0)Result+='1';
 			else if (p.x ==-1 && p.y ==0 &&Result =="")Result+="-1";
 			else if (p.x > 1)Result +=p.x;
@@ -872,6 +872,7 @@ public class PolynomialSolver implements IPolynomialSolver{
 		//-- through an exception if, at least, one of the polynomials is empty --
 		if (X == null || Y == null || X.size() == 0 || Y.size() == 0){
 			throw new IllegalArgumentException("Empty polynomials must be set");
+			// System.out.println("Errorr");
 		}
 
 
@@ -941,12 +942,12 @@ public class PolynomialSolver implements IPolynomialSolver{
 			else i++;
 		}
 
-		//-- return zero if R is empty after all zero terms are removed --
+		// -- return zero if R is empty after all zero terms are removed --
 		if(R.size() == 0) R.add(new java.awt.Point(0,0));
 
 		//-- return sorted R --
 		return sort(R);
-  }
+	}
 
 
 
@@ -956,7 +957,7 @@ public class PolynomialSolver implements IPolynomialSolver{
 //------------- main method -------------//
 	public static void main(String[] args) {
 
-	  try{
+		try{
 
 			PolynomialSolver p = new PolynomialSolver();
 			Scanner sc = new Scanner(System.in);
